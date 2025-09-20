@@ -9,7 +9,7 @@ const PORT = 4000;
 
 // Allow requests from frontend
 app.use(cors({
-  origin: ["http://localhost:3000", "https://theinterlake.com"]
+  origin: ["http://localhost:3000", "https://media.theinterlake.com"]
 }));
 
 // Ensure uploads folder exists
