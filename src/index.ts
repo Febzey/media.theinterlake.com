@@ -9,8 +9,9 @@ const PORT = 4000;
 
 // Allow requests from frontend
 app.use(cors({
-  origin: ["http://localhost:3000", "https://media.theinterlake.com"]
+  origin: ["http://localhost:3000", "https://theinterlake.com"],
 }));
+
 
 // Ensure uploads folder exists
 const uploadDir = path.join(__dirname, "../uploads");
@@ -32,14 +33,17 @@ const upload = multer({ storage });
 app.use("/uploads", express.static(uploadDir));
 
 // Upload route
+// Upload route
 app.post("/upload", upload.single("image"), (req: Request, res: Response) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
 
-  const fileUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
+  // Use domain instead of localhost
+  const fileUrl = `https://media.theinterlake.com/uploads/${req.file.filename}`;
   return res.json({ url: fileUrl });
 });
+
 
 // Health check
 app.get("/", (_req: Request, res: Response) => {
